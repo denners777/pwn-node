@@ -9,19 +9,18 @@ const cotacao = (symbol, callback) => {
     request({url: url, json: true}, (err, response) =>{
         if(err){
             throw new Error(`Something went wrong: ${err}`)
-        }
+        }        
         
-        const parsedJSON = response.body
-        
-        if(parsedJSON.data === undefined){
+        if(response.body.data === undefined){
             throw new Error(`No data found`)
-        }
-        const data = {
-            symbol: parsedJSON.data[0].symbol,
-            description: parsedJSON.data[0].name,
-            price: parsedJSON.data[0].price
+        }        
+        
+        const parsedJSON = response.body.data[0]
 
-        }
+        const {symbol, price_open, price, day_high, day_low} = parsedJSON
+
+        const data = {symbol, price_open, price, day_high, day_low}
+
         callback(data)
     })
 }

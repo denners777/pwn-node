@@ -3,6 +3,8 @@ const chalk = require('chalk')
 
 const addTask = (name, description) => {
 
+    debugger
+
     const tasks = loadAllTasks()
 
     const duplicatedTask = tasks.find((taks) => taks.name === name)
