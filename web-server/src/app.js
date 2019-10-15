@@ -2,12 +2,8 @@ const express = require('express')
 
 const app = express()
 
-// minhaapp.com.br
-// minhaapp.com.br/help
-// minhaapp.com.br/about
-
 app.get('', (req, res) =>{
-    res.send('Hello minha app')
+    res.send('<h1>Hello minha app</h1>')
 })
 
 app.get('/help', (req, res) => {
@@ -15,11 +11,23 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/about', (req, res) => {
-    res.send('about page')
+    res.send('I am at the about page')
 })
 
 app.get('/cotacoes', (req, res) => {
-    res.send('cotacoes page')
+    const cotacao = {
+        symbol : 'PETR4.SA', 
+        price_open: 10, 
+        price : 12, 
+        day_high : 13, 
+        day_low : 9    
+    }
+
+    const cotacoes = new Array()
+    cotacoes.push(cotacao)
+    cotacoes.push(cotacao)
+
+    res.send(cotacoes)
 })
 
 app.listen(3000, () => {
