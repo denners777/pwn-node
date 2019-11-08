@@ -16,21 +16,21 @@ app.use(express.static(publicDirectoryPath))
 app.get('', (req, res) => {
     res.render('index',{
         title: 'Cotações',
-        author: 'Biharck'
+        author: 'Denner'
     })
 })
 
 app.get('/about', (req, res) => {
     res.render('about',{
         title: 'Sobre',
-        author: 'Biharck Araújo'
+        author: 'Denner Fernandes'
     })
 })
 
 app.get('/help', (req, res) => {
     res.render('help',{
         title: 'Ajuda',
-        author: 'Biharck Araújo'
+        author: 'Denner'
     })
 })
 
@@ -55,7 +55,7 @@ app.get('/help/*', (req, res) => {
     res.render('404', {
         title : '404',
         errorMessage : 'Não existe página depois de /help',
-        author: 'Biharck Araújo'
+        author: 'Denner'
     })
 })
 
@@ -63,7 +63,7 @@ app.get('*', (req, res) => {
     res.render('404', {
         title : '404',
         errorMessage : 'Página não encontrada',
-        author: 'Biharck Araújo'
+        author: 'Denner'
     })
 })
 
