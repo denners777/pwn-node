@@ -1,11 +1,13 @@
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
+const cotacoes = require('./util/cotacao')
 
 const app = express()
 const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
+
 
 app.set('view engine', 'hbs')
 app.set('views', viewsPath)
@@ -16,7 +18,7 @@ app.use(express.static(publicDirectoryPath))
 app.get('', (req, res) => {
     res.render('index',{
         title: 'Cotações',
-        author: 'Denner'
+        author: 'Denner Fernandes'
     })
 })
 
@@ -30,24 +32,34 @@ app.get('/about', (req, res) => {
 app.get('/help', (req, res) => {
     res.render('help',{
         title: 'Ajuda',
-        author: 'Denner'
+        author: 'Denner Fernandes'
     })
 })
 
 app.get('/cotacoes', (req, res) => {
-    const cotacao = {
-        symbol : 'PETR4.SA', 
-        price_open: 10, 
-        price : 12, 
-        day_high : 13, 
-        day_low : 9    
+
+    if(!req.query.ativo){
+        return res.status(400).json({
+            error : {
+                mensage: 'O ativo deve ser informado como query parameter',
+                code : 400
+            }
+        })
     }
 
-    const cotacoes = new Array()
-    cotacoes.push(cotacao)
-    cotacoes.push(cotacao)
+    const symbol = req.query.ativo.toUpperCase()
 
-    res.send(cotacoes)
+    cotacoes(symbol, (err, body) => {
+        if(err){
+                    
+            return res.status(err.code).json({error : {
+                mensage: 'O ativo deve ser informado como query parameter',
+                code : err.code
+            }})
+        }
+        res.status(200).json(body)
+    })
+
 })
 
 app.get('/help/*', (req, res) => {
@@ -55,7 +67,7 @@ app.get('/help/*', (req, res) => {
     res.render('404', {
         title : '404',
         errorMessage : 'Não existe página depois de /help',
-        author: 'Denner'
+        author: 'Denner Fernandes'
     })
 })
 
@@ -63,7 +75,7 @@ app.get('*', (req, res) => {
     res.render('404', {
         title : '404',
         errorMessage : 'Página não encontrada',
-        author: 'Denner'
+        author: 'Denner Fernandes'
     })
 })
 
