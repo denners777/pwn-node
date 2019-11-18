@@ -9,14 +9,14 @@ const cotacao = (symbol, callback) => {
     request({url: url, json: true}, (err, response) =>{
         if(err){
             callback({
-                message : `Something went wrong: ${err}`,
+                mensage : `Something went wrong: ${err}`,
                 code : 500
             }, undefined)
         }        
         
         if(response.body === undefined || response.body.data === undefined){
             callback({
-                message : `No data found`,
+                mensage : `No data found`,
                 code : 404
             }, undefined)
         }        
