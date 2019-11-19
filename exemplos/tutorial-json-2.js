@@ -2,8 +2,8 @@ const fs = require('fs')
 
 // objeto criado
 const pessoa = {
-    nome : 'Biharck',
-    sobrenome : 'Araújo',
+    nome : 'Denner',
+    sobrenome : 'Fernandes',
     idade : 32
 }
 
